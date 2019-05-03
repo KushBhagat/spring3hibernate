@@ -46,8 +46,13 @@
 	</reporting>
 
 	<build>
-		<!-- <sourceDirectory>src</sourceDirectory> <resources> <resource> <directory>src</directory> 
-			<excludes> <exclude>**/*.java</exclude> </excludes> </resource> </resources> -->
+		 <sourceDirectory>src</sourceDirectory> 
+		 <resources> 
+		 <resource> 
+		 <directory>src</directory> 
+			<excludes> <exclude>**/*.java</exclude> </excludes> 
+		</resource> 
+		</resources> 
 		<plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -140,6 +145,30 @@
 					<update>true</update>
 					<port>11011</port>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -448,6 +477,27 @@
 			<artifactId>junit</artifactId>
 			<version>4.4</version>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+		<dependency>
+		<groupId>org.sonarsource.scanner.maven</groupId>
+		<artifactId>sonar-maven-plugin</artifactId>
+		<version>3.2</version>
+		</dependency>
+		<profiles>
+		<profile>
+		<id>sonar</id>
+		<activation>
+		<activeByDefault>true</activeByDefault>
+		</activation>
+		<properties>
+		<!-- Optional URL to server. Default value is http://localhost:9000 -->
+		<sonar.host.url> http://localhost:9000 </sonar.host.url>
+		<sonar.login>Admin</sonar.login>
+	    <sonar.password>Admin</sonar.password>
+		<sonar.projectKey>2a91a0ac94e0fbe9f997168accbbfbdaf4ea6af3</sonar.projectKey>
+		</properties>
+		</profile>
+		</profiles>
 	</dependencies>
 </project>
