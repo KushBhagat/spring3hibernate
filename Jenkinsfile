@@ -13,7 +13,7 @@ pipeline {
 	
 	parameters {
 		string(name: 'PHASE', defaultValue: 'CLEAN,BUILD,TEST,SONAR,QUALITYGATE,', description: 'COMPLETE for new branches to build required test packages, CLEAN for maven clean')
-		string (name: 'GIT_URL',defaultValue: '', description: '', trim: false)
+		string (name: 'repo',defaultValue: '', description: '', trim: false)
 }
 	
 	stages 
@@ -21,7 +21,7 @@ pipeline {
                stage('Checkout') {
                      steps 
 					 {   
-                      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: '$GIT_URL']]])
+                      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'http://github.com/KushBhagat/${params.repo}.git']]])
                      }    
                 }
 
