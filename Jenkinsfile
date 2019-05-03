@@ -36,22 +36,7 @@ pipeline {
 				}
 			}
 		}
-        stage('CompleteBuild') 
-						{
-                          when {
-                                expression { params.PHASE.contains('COMPLETE')  }
-                               }
-                          steps 
-						       {
-                                withMaven(
-                                        maven: 'M3',
-                                        mavenOpts: '-XX:+TieredCompilation -XX:TieredStopAtLevel=1',
-                                        options:[artifactsPublisher(allowEmptyArchive:true),junitPublisher(disabled:true),openTasksPublisher(disabled:true)]) {
-                                                sh 'mvn -U -Dmaven.test.skip=false -Dmaven.includeScope=compile -Dmaven.test.failure.ignore=true install'
-                                        }
-                                }
-                        }
-        
+                  
 		stage('Build') 
 		{
 			when {
@@ -83,6 +68,11 @@ pipeline {
 			}
 		}
 			
+		  stage('JaCoCo') {
+            steps {
+                echo 'Code Coverage'
+                jacoco()
+            }
 		stage('Sonar') {
 			
 			when {
