@@ -171,6 +171,21 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<profiles>
+		<profile>
+		<id>sonar</id>
+		<activation>
+		<activeByDefault>true</activeByDefault>
+		</activation>
+		<properties>
+		<!-- Optional URL to server. Default value is http://localhost:9000 -->
+		<sonar.host.url> http://localhost:9000 </sonar.host.url>
+		<sonar.login>Admin</sonar.login>
+	        <sonar.password>Admin</sonar.password>
+		<sonar.projectKey>2a91a0ac94e0fbe9f997168accbbfbdaf4ea6af3</sonar.projectKey>
+		</properties>
+		</profile>
+		</profiles>
 	</build>
 	<version>1.8-SNAPSHOT</version>
 	<name>Spring3HibernateApp</name>
@@ -484,20 +499,5 @@
 		<artifactId>sonar-maven-plugin</artifactId>
 		<version>3.2</version>
 		</dependency>
-		<profiles>
-		<profile>
-		<id>sonar</id>
-		<activation>
-		<activeByDefault>true</activeByDefault>
-		</activation>
-		<properties>
-		<!-- Optional URL to server. Default value is http://localhost:9000 -->
-		<sonar.host.url> http://localhost:9000 </sonar.host.url>
-		<sonar.login>Admin</sonar.login>
-	    <sonar.password>Admin</sonar.password>
-		<sonar.projectKey>2a91a0ac94e0fbe9f997168accbbfbdaf4ea6af3</sonar.projectKey>
-		</properties>
-		</profile>
-		</profiles>
-	</dependencies>
+		</dependencies>
 </project>
